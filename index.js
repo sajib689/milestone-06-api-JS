@@ -3,10 +3,12 @@ fetch('https://openapi.programming-hero.com/api/videos/category/1000')
   .then(data => myFunction(data.data));
 
 const myFunction = (data) => {
-  data.map(singleData => {
+    const filterData = data.filter(singleData => singleData.category_id === '1001')
+    console.log(filterData)
+    filterData.map(singleData => {
     const container = document.getElementById('container');
     const createData = document.createElement('div'); // Fix the typo here
-
+   
     createData.innerHTML = `
       <div class="card card-compact w-96 bg-base-100 shadow-xl">
         <figure><img src="${singleData.thumbnail}" alt="Shoes" /></figure>
