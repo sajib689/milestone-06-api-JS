@@ -26,7 +26,7 @@ const handleLoadVideo = (id) => {
       // console.log(data.data);
       data.data.map( (video) => {
         const div = document.createElement("div");
-        btn.classList.add('bg-red-500');
+        // btn.classList.add('bg-red-500');
         div.classList.add('card', 'card-compact','mt-20', 'w-[300px]', 'bg-base-100', 'shadow-xl');
         div.innerHTML = `
        
@@ -58,3 +58,4 @@ const handleLoadVideo = (id) => {
     
 };
 
+handleLoadVideo(1000)
