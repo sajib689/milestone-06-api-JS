@@ -23,7 +23,7 @@ const handleLoadVideo = (id) => {
   fetch(`https://openapi.programming-hero.com/api/videos/category/${id}`)
     .then((res) => res.json())
     .then( data => {
-      console.log(data.data);
+      // console.log(data.data);
       data.data.map( (video) => {
         const div = document.createElement("div");
         btn.classList.add('bg-red-500');
@@ -58,7 +58,3 @@ const handleLoadVideo = (id) => {
     
 };
 
-
-const handleShort = () => {
-  
-};
