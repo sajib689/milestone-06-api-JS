@@ -27,16 +27,27 @@ const handleLoadVideo = (id) => {
         
         
         const div = document.createElement("div");
-        div.classList.add('card', 'card-compact','mt-20', 'w-[250px]', 'bg-base-100', 'shadow-xl');
+        div.classList.add('card', 'card-compact','mt-20', 'w-[300px]', 'bg-base-100', 'shadow-xl');
         div.innerHTML = `
        
     <figure><img src="${video.thumbnail}" alt="Shoes" /></figure>
-    <div class="card-body">
-      <h2 class="card-title">Shoes!</h2>
-      <p>If a dog chews shoes whose shoes does he choose?</p>
-      <div class="card-actions justify-end">
-        <button class="btn btn-primary">Buy Now</button>
+    <div class='mt-3'>
+     
+      <div class="flex justify-around items-center">
+      <div class="avatar online placeholder">
+      <div class="bg-neutral text-neutral-content rounded-full w-16">
+      <img src="${video.authors[0].profile_picture}" />
+
       </div>
+    </div>
+      
+
+        <div>
+            <h1 class="card-title">${video.title}</h1>
+            <p>${video.authors[0].profile_name}</p>
+            <p>${video.others.views}</p>
+        </div>
+    </div>
     
     </div>
         
@@ -48,6 +59,3 @@ const handleLoadVideo = (id) => {
 
     
 };
-const displayVideo = (data) => {
-  
-}
