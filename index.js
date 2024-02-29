@@ -8,7 +8,7 @@ const categories = (categories) => {
   categories.map((category) => {
     const div = document.createElement("div");
     div.innerHTML = `
-        <button onClick="handleLoadVideo('${category.category_id}')" class="btn btn-active btn-ghost">${category.category}</button>
+        <button id='btn-bg' onClick="handleLoadVideo('${category.category_id}')" class="btn bg-ghost">${category.category}</button>
 
         `;
     categoriesButton.appendChild(div);
@@ -18,15 +18,15 @@ const categories = (categories) => {
 const handleLoadVideo = (id) => {
   const videoContainer = document.getElementById("video-container");
   videoContainer.textContent = ''
+  
+  const btn = document.getElementById('btn-bg');
   fetch(`https://openapi.programming-hero.com/api/videos/category/${id}`)
     .then((res) => res.json())
     .then( data => {
       console.log(data.data);
       data.data.map( (video) => {
-        console.log(video);
-        
-        
         const div = document.createElement("div");
+        btn.classList.add('bg-red-500');
         div.classList.add('card', 'card-compact','mt-20', 'w-[300px]', 'bg-base-100', 'shadow-xl');
         div.innerHTML = `
        
@@ -40,9 +40,7 @@ const handleLoadVideo = (id) => {
 
       </div>
     </div>
-      
-
-        <div>
+     <div>
             <h1 class="card-title">${video.title}</h1>
             <p>${video.authors[0].profile_name}</p>
             <p>${video.others.views}</p>
@@ -58,4 +56,9 @@ const handleLoadVideo = (id) => {
     });
 
     
+};
+
+
+const handleShort = () => {
+  
 };
