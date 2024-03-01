@@ -1,3 +1,10 @@
+let shortByViews = false;
+const sortBtn = document.getElementById('sort-btn');
+
+sortBtn.addEventListener('click', () => {
+  shortByViews = true;
+  handleLoadVideo(1000)
+})
 fetch("https://openapi.programming-hero.com/api/videos/categories")
   .then((res) => res.json())
   .then((data) => categories(data.data));
@@ -17,12 +24,9 @@ const categories = (categories) => {
   });
 };
 
-const handleLoadVideo = (id,button) => {
+const handleLoadVideo = (id,button,shortByViews) => {
   const videoContainer = document.getElementById("video-container");
   videoContainer.textContent = ''
-  
-  
-  button.classList.remove('bg-red-700');
   fetch(`https://openapi.programming-hero.com/api/videos/category/${id}`)
     .then((res) => res.json())
     .then( data => {
@@ -36,12 +40,20 @@ const handleLoadVideo = (id,button) => {
       
       data.data.map( (video) => {
         const div = document.createElement("div");
-        button.classList.add('bg-red-700');
         let verifiedIcon = ''
         if(video.authors[0].verified === true){
            verifiedIcon = `<img src='./images/fi_10629607.png'/>`
         }
-        console.log(data.data)
+       if(shortByViews){
+        video.sort((a, b) =>{
+          const totalViewsFirst = a.others?.views
+          const totalViewsSecond = b.others?.views
+          const totalViewsFirstNumber = parseFloat(totalViewsFirst.replace('K', '')) || 0
+          const totalViewsSecondNumber = parseFloat(totalViewsSecond.replace('K', '')) || 0
+          return totalViewsSecondNumber - totalViewsFirstNumber
+
+        })
+       }
         div.classList.add('card', 'card-compact','mt-20', 'w-[300px]', 'bg-base-100', 'shadow-xl');
         div.innerHTML = `
        
@@ -73,4 +85,4 @@ const handleLoadVideo = (id,button) => {
     
 };
 
-handleLoadVideo(1000)
+handleLoadVideo(1000,shortByViews)
