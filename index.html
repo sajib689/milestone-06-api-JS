@@ -6,6 +6,8 @@
     <title>Document</title>
     <link href="https://cdn.jsdelivr.net/npm/daisyui@4.7.2/dist/full.min.css" rel="stylesheet" type="text/css" />
     <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
 </head>
 <body>
 
@@ -32,7 +34,9 @@
     <div id="video-container" class="grid grid-cols md:grid-cols-4 gap-4 container mx-auto">
 
     </div>
-   
+   <!-- Add this HTML where you want to display the "No Data Found" text -->
+<div id="no-data-message" class="hidden text-8xl text-red-500 text-center mt-4 font-bold">No Data Found</div>
+
     <script src="./index.js"></script>
 </body>
 </html>

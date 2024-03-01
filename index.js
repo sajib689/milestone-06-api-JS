@@ -8,25 +8,40 @@ const categories = (categories) => {
   categories.map((category) => {
     const div = document.createElement("div");
     div.innerHTML = `
-        <button id='btn-bg' onClick="handleLoadVideo('${category.category_id}')" class="btn bg-ghost">${category.category}</button>
+        <button id='btn-bg' onClick="handleLoadVideo('${category.category_id}',this)" class="btn bg-ghost">${category.category}</button>
 
         `;
     categoriesButton.appendChild(div);
+    
+    
   });
 };
 
-const handleLoadVideo = (id) => {
+const handleLoadVideo = (id,button) => {
   const videoContainer = document.getElementById("video-container");
   videoContainer.textContent = ''
   
-  const btn = document.getElementById('btn-bg');
+  
+  button.classList.remove('bg-red-700');
   fetch(`https://openapi.programming-hero.com/api/videos/category/${id}`)
     .then((res) => res.json())
     .then( data => {
       // console.log(data.data);
+      const noData = document.getElementById('no-data-message')
+      if(data.data.length === 0) {
+        noData.classList.remove('hidden')
+      } else {
+        noData.classList.add('hidden')
+      }
+      
       data.data.map( (video) => {
         const div = document.createElement("div");
-        // btn.classList.add('bg-red-500');
+        button.classList.add('bg-red-700');
+        let verifiedIcon = ''
+        if(video.authors[0].verified === true){
+           verifiedIcon = `<img src='./images/fi_10629607.png'/>`
+        }
+        console.log(data.data)
         div.classList.add('card', 'card-compact','mt-20', 'w-[300px]', 'bg-base-100', 'shadow-xl');
         div.innerHTML = `
        
@@ -42,7 +57,7 @@ const handleLoadVideo = (id) => {
     </div>
      <div>
             <h1 class="card-title">${video.title}</h1>
-            <p>${video.authors[0].profile_name}</p>
+            <div class='flex'><p>${video.authors[0].profile_name} </p> ${verifiedIcon} </div>
             <p>${video.others.views}</p>
         </div>
     </div>
